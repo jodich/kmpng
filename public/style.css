@@ -1,0 +1,129 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0px;
+	height: 100%;
+/* 	background-image: linear-gradient(rgba(6, 39, 58, 0.7), rgba(6, 39, 58, 1) ), url("/images/hdb-flats.jpg");
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+    background-color: #FFF;
+    font-family: 'Palanquin', sans-serif;
+
+}
+
+a {
+	color: black;
+}
+
+.row {
+	margin: 0px;
+}
+
+
+/* =========== NAVIGATION BAR STUFF =========== */
+/* row */
+#nav {
+	padding-top: 30px;
+}
+
+/* col */
+.navigation {
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+
+.navigation > div {
+	display: inline-block;
+	color: #000;
+}
+
+.nav-left {
+	width: fit-content;
+	text-align: right;
+	padding-right: 70px;
+}
+
+.nav-right {
+	width: fit-content;
+	text-align: left;
+	padding-left: 70px;
+}
+
+/* each button */
+.navbar-link {
+	/* background-color: red; */
+	display: inline-block;
+	width: 120px;
+	margin: 20px 0px;
+	color: #000;
+	font-size: 0.8rem;
+}
+
+.navbar-link a {
+	color: #000;
+	font-size: 13px;
+	font-weight: 900;
+	/* color: #FABF48; */
+}
+
+#logo {
+	width: 140px;
+	position: relative;
+	top: -10px;
+}
+
+
+
+/* =========== INTRO STUFF =========== */
+#first {
+	/* background-color: red; */
+	padding: 0px;
+	margin-top: 80px;
+}
+
+.content {
+	/* background-color: rgba(255, 255, 255, 1); */
+	/* border: 1px solid black; */
+}
+
+.content:nth-child(2) {
+	/* background-color: rgba(255, 255, 255, 0.5); */
+	/* border: 1px solid black; */
+	padding: 40px 40px 0px 40px;
+	text-align: center;
+	/* height: 400px; */
+	color: #000;
+}
+h1, h2 {
+	font-weight: 700;
+	font-family: 'Vollkorn', serif;
+
+}
+
+
+
+/* =========== SIGN UP STUFF =========== */
+
+#map {
+	width: 60%;
+	min-width: 200px;
+	height: 200px;
+	display: none;
+	margin: 0 auto;
+	text-align: left;
+}
+
+/* =========== SIGN UP & LOGIN STUFF =========== */
+
+input {
+	display: block;
+	margin: 0 auto;
+	width: 60%;
+	min-width: 200px;
+}
+
+
