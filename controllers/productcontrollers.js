@@ -5,6 +5,13 @@ const productModel = require('../models/productmodels.js');
 const messagesModel = require('../models/messagesmodels.js');
 const model = require('../models/models.js');
 
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'db2fpatds', 
+  api_key: '491492416143532', 
+  api_secret: 'UhXNYUV93GaYh_h0kONJYI0H61I'
+});
+
 
 // DEFINE controllers
 // const getNewItemForm = (request, response) => {};
@@ -16,9 +23,7 @@ const getNewItemForm = (request, response) => {
     
     if (model.checkAuth(userId, hasedCookie)) {
 
-        model.selectAllServices((err, result) => {
-            response.render('userproducts/newItem', {results: result.rows});
-        });
+        response.render('userproducts/newProduct');
 
     } else {
        response.redirect('/user/login');
@@ -56,33 +61,91 @@ const getEditProduct = (request, response) => {
 
 };
 
-const postNewItem = (request, response) => {
-    let newItem = request.body;
-    newItem.availability = 'true';
-    newItem.owner_id = request.cookies['user_id'];
+// const postNewItem = (request, response) => {
+//     let newItem = request.body;
+//     newItem.availability = 'true';
+//     newItem.owner_id = request.cookies['user_id'];
 
-    let ownerId = request.cookies['user_id'];
-    userModel.selectUser('id', ownerId, (err, result) => {
+//     let ownerId = request.cookies['user_id'];
+//     userModel.selectUser('id', ownerId, (err, result) => {
 
-        newItem.location = result.rows[0].location;
+//         newItem.location = result.rows[0].location;
 
-        productModel.insertNewItem(newItem, (err, result) => {
-            response.redirect('/user/product');
+//         productModel.insertNewItem(newItem, (err, result) => {
+//             response.redirect('/user/product');
+//         });
+//     });
+// };
+
+const postNewItem2 = (request, response) => {
+
+    if (request.file == undefined) {
+
+        let errMessage = "You need to upload an Image";
+        response.render('error', { message: errMessage });
+
+    } else {
+
+        cloudinary.uploader.upload(request.file.path, function(result) {
+
+            let ownerId = request.cookies['user_id'];
+            userModel.selectUser('id', ownerId, (err, result2) => {
+
+                let newItem = request.body;
+                newItem.availability = 'true';
+                newItem.owner_id = ownerId;
+                newItem.location = result2.rows[0].location;
+                newItem.img = result.secure_url;
+
+                productModel.insertNewItem(newItem, (err, result3) => {
+                    response.redirect('/user/product');
+                });
+            });
         });
-    });
+    }
 };
 
-const putUpdatedProduct = (request, response) => {
+
+
+// const putUpdatedProduct = (request, response) => {
+
+//     let productId = request.params.id;
+
+//     let updatedItem = request.body
+    
+//     productModel.updateProduct(updatedItem, productId, (err, result) => {
+//         response.redirect('/user/product/' + productId)
+//     });
+
+// }
+
+const putUpdatedProduct2 = (request, response) => {
 
     let productId = request.params.id;
-
     let updatedItem = request.body
-    
-    productModel.updateProduct(updatedItem, productId, (err, result) => {
-        response.redirect('/user/product/' + productId)
-    });
 
+    if (request.file == undefined) {
+
+        productModel.updateProductNoImg(updatedItem, productId, (err, result) => {
+            response.redirect('/user/product/' + productId)
+        }); 
+
+    } else {
+
+        cloudinary.uploader.upload(request.file.path, function(result) {
+
+                updatedItem.img = result.secure_url
+                
+                productModel.updateProduct(updatedItem, productId, (err, result) => {
+                    response.redirect('/user/product/' + productId)
+                });    
+            });
+    }
+
+    
 }
+
+
 
 const putProductsAvailabilty = (request, response) => {
     
@@ -126,13 +189,13 @@ const getProducts = (request, response) => {
             let userLocation = result.rows[0].location;
 
             productModel.selectAvailableProducts(userLocation, userId, (err, result) => {
-                response.render('products/products', {results: result.rows})
+                response.render('browse/products', {results: result.rows})
             });
 
         });
 
     } else {
-        response.redirect('/user/login')
+        response.redirect('/user/new')
     }
 
 };
@@ -143,9 +206,19 @@ const getOneProductBrowse = (request, response) => {
 
     productModel.selectProduct(productId, (err, result) => {
 
-        response.render('products/oneProductBrowse', {results: result.rows[0]})
+        response.render('browse/oneProductBrowse', {results: result.rows[0]})
     });
 }
+
+
+
+
+
+
+
+
+
+
 
 
 const getRequestForm = (request, response) => {
@@ -159,7 +232,7 @@ const getRequestForm = (request, response) => {
 
         productModel.selectProduct(productId, (err, result) => {
 
-            response.render('products/request', {results: result.rows[0]})
+            response.render('messages/request', {results: result.rows[0]})
         });
     } else {
         response.redirect('/user/login')
@@ -189,12 +262,12 @@ const postRequest = (request, response) => {
 module.exports = {
     getNewItemForm,
     getProducts,
-    postNewItem,
     putProductsAvailabilty,
     getOneProduct,
     getOneProductBrowse,
     getEditProduct,
-    putUpdatedProduct,
     getRequestForm,
-    postRequest
+    postRequest,
+    postNewItem2,
+    putUpdatedProduct2
 };

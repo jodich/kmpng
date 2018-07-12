@@ -1,8 +1,20 @@
-document.body.style.background = "linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.85) ), url('/images/hdb-flats.jpg')";
-document.body.style.backgroundSize = "cover";
-document.body.style.backgroundPosition = "center";
-document.body.style.backgroundRepeat = "no-repeat";
+var inputs = document.querySelectorAll('.inputfile');
+inputs.forEach(( input ) =>
+{
+	var label	 = input.nextElementSibling;
+		labelVal = label.innerHTML;
 
+	input.addEventListener('change', function( e )
+	{
+		var fileName = '';
+		fileName = e.target.value.split( '\\' ).pop();
+
+		if( fileName )
+			document.querySelector('#filename').innerHTML = fileName;
+		else
+			document.querySelector('#filename').innerHTML = 'No file choosen';
+	});
+});
 
 
 

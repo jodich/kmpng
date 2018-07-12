@@ -1,8 +1,8 @@
 var initMap = () => {
 
-	document.getElementById('submit').addEventListener('click', function mapping() {
+	document.getElementById('location').addEventListener('click', function mapping() {
 
-		document.getElementById('submit').removeEventListener('click', mapping);
+		document.getElementById('location').removeEventListener('click', mapping);
 
 		if (navigator.geolocation) {
 	        navigator.geolocation.getCurrentPosition(function(position) {

@@ -14,8 +14,14 @@ const getUser = (request, response) => {
     let hasedCookie = request.cookies["logged_in"]
     
     if (model.checkAuth(userId, hasedCookie)) {
-        
-        response.render('user/userProfile');
+
+        userModel.selectUser('id', userId, (err, resultUser) => {
+
+            userModel.selectUserProductsCount( userId, (err, resultUserItems) => {
+
+                response.render('userlogin/userProfile', {userDetails: resultUser.rows[0], userProductsCount: resultUserItems.rows[0] });
+            })
+        })
 
     } else {
         response.redirect('/user/login');
@@ -25,12 +31,12 @@ const getUser = (request, response) => {
 
 const getNewUserForm = (request, response) => {
 
-    response.render('user/newUser');
+    response.render('userlogin/newUser');
 };
 
 const getLoginForm = (request, response) => {
     
-    response.render('user/login');
+    response.render('userlogin/login');
 };
 
 const getUserProducts = (request, response) => {
@@ -53,24 +59,39 @@ const getUserProducts = (request, response) => {
 
 const postNewUser = (request, response) => {
     let newUser = request.body;
-    newUser.password = sha256(newUser.password);
 
-    userModel.selectUser('email', newUser.email, (err, result) => {
+    if (newUser.location != "click here to get location") {
 
-        if (result.rows[0] == undefined) {
-            // checks if the email does not exist in database. Can create new one.
-            userModel.insertNewUser(newUser, (err, result) => {
+        if (newUser.password === newUser.cmfpassword) {
+            newUser.password = sha256(newUser.password);
 
-                model.setAuth(result.rows[0].id, response);
-                response.cookie('user_id', result.rows[0].id);
+            userModel.selectUser('email', newUser.email, (err, result) => {
 
-                response.redirect('/user');
+                if (result.rows < 1) {
+                    // checks if the email does not exist in database. Can create new one.
+                    userModel.insertNewUser(newUser, (err, result2) => {
+
+                        model.setAuth(result2.rows[0].id, response);
+                        response.cookie('user_id', result2.rows[0].id);
+
+                        response.redirect('/user');
+                    });
+
+                } else {
+                    let errMessage = "Email already exist"
+                    response.render('error', { message: errMessage })
+                }
             });
 
         } else {
-            response.send('email already exist');
+            let errMessage = "Passwords do not match"
+            response.render('error', { message: errMessage })
         }
-    });
+    } else {
+        let errMessage = "We need your location for this to work"
+        response.render('error', { message: errMessage })
+    }
+
 };
 
 const postUserLogin = (request, response) => {
@@ -81,19 +102,33 @@ const postUserLogin = (request, response) => {
 
         if (result.rows[0] == undefined) {
         // checks if the email does not exist
-            response.send('no user with this email')
+            let errMessage = "Invalid Email"
+            response.render('error', { message: errMessage })
+
         } else {
 
             if(result.rows[0].password === inputUser.password) { 
             // checks if the password is right
 
-                model.setAuth(result.rows[0].id, response);
-                response.cookie('user_id', result.rows[0].id);
+                let userId = result.rows[0].id
 
-                response.redirect('/user');
+                model.setAuth(userId, response);
+                response.cookie('user_id', userId);
+
+
+                messagesModel.selectUnreadMessage(userId, (err, result2) => {
+                    let unreadMsg = result2.rows.length;
+
+                    if (unreadMsg >= 1) {
+                      response.cookie('unread_msg', unreadMsg);  
+                    }
+                    
+                    response.redirect('/user');
+                }) 
 
             } else {
-                response.send('password is wrong')
+                let errMessage = "Incorrect Password"
+                response.render('error', { message: errMessage })
             }
         }
     });
@@ -115,6 +150,8 @@ const postUserLogin = (request, response) => {
 const getLogout = (request, response) => {
     response.clearCookie('logged_in');
     response.clearCookie('user_id');
+    response.clearCookie('unread_msg');
+
 
     response.redirect('/');
 }
@@ -136,7 +173,12 @@ const getMessages = (request, response) => {
 
     messagesModel.selectUserMessages(userId, (err, result) => {
 
-        response.render('user/messages', {results: result.rows})
+        messagesModel.updateUnreadMessages(userId, (err, result2) => {
+            
+            response.clearCookie('unread_msg');
+            response.render('messages/messages', {results: result.rows})
+
+        })
     })
 }
 
@@ -144,9 +186,9 @@ const getMessageReply = (request, response) => {
 
     let messageId = request.params.id;
 
-    messagesModel.selectMessage(messageId, (err, result) => {
+    messagesModel.selectMessageAndDetails(messageId, (err, result) => {
 
-        response.render('user/reply', {results: result.rows[0]});
+        response.render('messages/reply', {results: result.rows[0]});
 
     });
 }

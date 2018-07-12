@@ -1,6 +1,6 @@
 var React = require("react");
 
-class LayoutContainer extends React.Component {
+class Navigation extends React.Component {
   render() {
     return (
 
@@ -10,12 +10,10 @@ class LayoutContainer extends React.Component {
           <div className="navbar-link"><a href="/products">Browse</a></div>
           <div className="navbar-link"><a href="/user">Profile</a></div>
           </div>
-          <div>
-          <div className="navbar-link" id="logo"> <a href="/">  <img src="/images/logo-02.svg" id="logo-img"/> </a> </div>
-          </div>
+          <div className="navbar-link nav-center" id="logo"> <a href="/">  <img src="/images/logo-02.svg" id="logo-img"/> </a> </div>
           <div className="nav-right">
-          <div className="navbar-link"><a href="/user/login">Log In</a></div>
-          <div className="navbar-link"><a href="/user/new">Sign Up</a></div>
+          <div className="navbar-link"><a id="login" href="/user/login">Log In</a><div id="notification">1</div></div>
+          <div className="navbar-link"><a id="signup" href="/user/new">Sign Up</a></div>
           </div>
         </div>
       </div>
@@ -23,7 +21,7 @@ class LayoutContainer extends React.Component {
   }
 }
 
-module.exports = LayoutContainer;
+module.exports = Navigation;
 
 
 

@@ -5,28 +5,38 @@
 html, body {
 	margin: 0px;
 	height: 100%;
-/* 	background-image: linear-gradient(rgba(6, 39, 58, 0.7), rgba(6, 39, 58, 1) ), url("/images/hdb-flats.jpg");
-	background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
     background-color: #FFF;
     font-family: 'Palanquin', sans-serif;
-
+    font-size: 1rem;
 }
 
 a {
 	color: black;
 }
 
+a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
 .row {
 	margin: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 700;
+	font-family: 'Vollkorn', serif;
+
 }
 
 
 /* =========== NAVIGATION BAR STUFF =========== */
 /* row */
 #nav {
-	padding-top: 30px;
+	padding-top: 10px;
+	border-bottom: 3px solid #FABF48;
+	/* background-color: #FABF48; */
+	box-shadow: 0px 0px 18px rgba(150,150,150, 0.6);
 }
 
 /* col */
@@ -45,12 +55,14 @@ a {
 	width: fit-content;
 	text-align: right;
 	padding-right: 70px;
+	padding-bottom: 10px;
 }
 
 .nav-right {
 	width: fit-content;
 	text-align: left;
 	padding-left: 70px;
+	padding-bottom: 10px;
 }
 
 /* each button */
@@ -65,65 +77,571 @@ a {
 
 .navbar-link a {
 	color: #000;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 900;
 	/* color: #FABF48; */
+	/* text-transform: uppercase; */
+	letter-spacing: 0.03rem;
+}
+
+.navbar-link a:hover {
+	color: #FABF48;
 }
 
 #logo {
-	width: 140px;
+	width: 125px;
 	position: relative;
 	top: -10px;
+	margin: 25px 0px 10px 0px;
 }
 
-
+#notification {
+	background-color: #FABF48;
+	display: inline-block;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 95%;
+	/* padding-left: 1px; */
+	font-size: 12px;
+	width: 14px;
+	height: 14px;
+	color: white;
+	margin: 0px 0px 0px 0px;
+	position: absolute;
+	display: none;
+}
 
 /* =========== INTRO STUFF =========== */
-#first {
-	/* background-color: red; */
-	padding: 0px;
-	margin-top: 80px;
+
+#intro {
+	padding: 80px 0 0 0;
 }
 
 .content {
-	/* background-color: rgba(255, 255, 255, 1); */
-	/* border: 1px solid black; */
 }
 
-.content:nth-child(2) {
-	/* background-color: rgba(255, 255, 255, 0.5); */
-	/* border: 1px solid black; */
-	padding: 40px 40px 0px 40px;
-	text-align: center;
-	/* height: 400px; */
+#intro .content:nth-child(1) {
+	padding: 35px 50px 0px 30px;
 	color: #000;
 }
-h1, h2 {
-	font-weight: 700;
-	font-family: 'Vollkorn', serif;
 
+#intro h1 {
+	padding-top: 20px;
 }
 
+#intro a {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+	padding: 5px;
+	border: 3px solid rgba(250, 191, 72, 1);
+	margin: 30px 0px 30px 3px;
+	background-color: rgba(250, 191, 72, 1);
+	border-radius: 2px;
+	box-shadow: 0px 0px 5px rgba(100,100,100,0.5);
+}
+
+#intro a:hover {
+	background-color: rgba(250, 191, 72, 0.8);
+}
+
+#intro .content:nth-child(2) {
+	min-height: 400px;
+	background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2) ), url("/images/hdb-02.jpg");
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#intro .row {
+	margin-bottom: 60px;
+}
+
+#intro .row:last-child {
+    margin-bottom: 0px;
+}
+
+#intro .extra {
+	min-height: 400px;
+	background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4) ), url("/images/hdb-flats.jpg");
+	background-position: 50% 20%;
+    background-repeat: no-repeat;
+    background-size: cover;
+	text-align: center;
+}
+
+#intro .extra a {
+	margin: 0 auto;
+	background-color: rgba(250, 191, 72, 0);
+	width: fit-content;
+	padding: 10px 25px;
+	border: 3px solid rgba(250, 191, 72, 1);
+	border-radius: 0px;
+	box-shadow: 0px 0px 2px rgba(100,100,100,0.5);
+	text-shadow: 0px 0px 1px rgba(50,50,50,0.4);
+	position: relative;
+	top: 180px;
+	color: rgba(250, 191, 72, 1);
+	font-size: 16px;
+	font-weight: 900;
+}
+
+@keyframes yourAnimation{
+    0%{
+        transform: rotate(xx);
+        opacity: 0;
+        }
+    100%{
+        transform: rotate(xx);
+        opacity: 1;
+        }
+}
+
+#intro .extra a {
+    animation: yourAnimation 0.7s 1 0s linear;
+}
+
+/* #6ec6ae */
+
+
+
+/* =========== SIGN UP & LOGIN STUFF =========== */
+
+
+
+#login, #signup {
+	padding-top: 80px;
+}
+
+#login .content,  #signup .content{
+	text-align: center;
+}
+
+.loginInput, .signupInput {
+	display: block;
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+.loginSubmit, .signupSubmit, .submit-btn {
+	border: 1px solid #ced4da;
+	margin: 30px auto 10px auto;
+	width: 100px;
+	background-color: #ced4da;
+	display: block;
+}
+
+#login a, #signup a {
+	font-size: 14px;
+}
 
 
 /* =========== SIGN UP STUFF =========== */
 
+.signupSide {
+	display: inline-block;
+    vertical-align: top;
+}
+
+
 #map {
-	width: 60%;
-	min-width: 200px;
-	height: 200px;
+	width: 100%;
+	height: 300px;
 	display: none;
-	margin: 0 auto;
+	margin: 7px auto;
 	text-align: left;
 }
 
-/* =========== SIGN UP & LOGIN STUFF =========== */
-
-input {
-	display: block;
-	margin: 0 auto;
-	width: 60%;
-	min-width: 200px;
+#getLocation {
+	font-size: 0.8rem;
+	float: right;
+	margin: 3px;
 }
 
+
+
+/* =========== PROFILE STUFF =========== */
+
+#profile {
+	padding-top: 80px;
+}
+
+#profile .content:nth-child(2) {
+	padding: 0px 50px 0 0;
+	/* background-color: yellow; */
+	margin-bottom: 30px;
+	min-width: 200px;
+	max-width: 200px;
+}
+
+#profile a {
+	font-size: 14px;
+}
+
+.sidebar-link {
+	padding: 10px;
+	border-right: 1px solid black;
+}
+a:last-child .sidebar-link {
+}
+.sidebar-link:hover{
+	text-align: right;
+}
+
+/* ======= */
+
+#profile .content:nth-child(3) {
+	padding-left: 20px;
+	/* background-color: red; */
+
+}
+
+#profile .content:nth-child(3) > div {
+	margin-bottom: 20px;
+}
+
+.profile-name {
+}
+.profile-details {
+}
+.profile-products {
+}
+
+
+/* ======================== new product, edit product ========================= */
+
+#new-item {
+	padding: 0px;
+	margin-top: 80px;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+	text-align: center;
+	padding: 5px 10px;
+    border: 1px solid #ced4da;
+	display: inline-block;
+	width: fit-content;
+	border-radius: .25rem;
+	margin-right: 10px;
+}
+
+#filename {
+	display: inline-block;
+}
+
+/* ======================== all products & user's products ========================= */
+
+#allproducts, #alluserproducts {
+	padding: 0px;
+	margin-top: 80px;
+}
+
+.all-thumbnails {
+	display: inline-block;
+    vertical-align: top;
+    padding: 15px 15px;
+}
+
+.thumbnail {
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	display: inline-block;
+	vertical-align: top;
+	text-overflow: clip;
+	height: 350px;
+	word-break: break-all;
+	hyphens: auto;
+	position: relative;
+	padding: 20px;
+	box-shadow: 0px 1px 5px rgba(150,150,150,0.6);
+    width: 100%;
+}
+
+#alluserproducts .thumbnail {
+	height: 350px;
+	background-color: rgba(206, 212, 218, 0.3)
+}
+
+.productImg {
+	padding: 0px;
+	border: 0px;
+	border-radius: 0px;
+	width: 100%;
+	min-height: 50%;
+	max-height: 200px;
+    position: relative;
+    object-fit: contain;
+}
+
+.caption {
+	overflow:hidden;
+	height: 80px;
+	position: absolute;
+	width: 100%;
+	top: 230px;
+	transform: translate(-20px, 0px);
+	padding: 5px 20px 0px 20px;
+	font-size: 15px;
+}
+
+.product-title {
+	width: 100%;
+	height: 20px;
+	line-height: 15px;
+	overflow: hidden;
+}
+
+#allproducts h6, #alluserproducts h6 {
+	font-size: 16px;
+	color: #93C5B2;
+}
+
+.more-details {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	transform: translate(-20px, 0px);
+	font-size: 0.9rem;
+	font-style: oblique;
+}
+
+.more-details a:hover {
+	color: rgba(250, 191, 72, 1);
+}
+.thumbnail-options:hover {
+	/* background-color: black; */
+}
+
+.more-details .thumbnail-options {
+	float: left;
+	width: 50%;
+	padding: 5px;
+	text-align: center;
+	height: 36px;
+	overflow:hidden;
+	line-height: 23px;
+}
+
+#option-left {
+	border-top: 1px solid #ced4da;
+	border-right: 1px solid #ced4da;
+}
+#option-right {
+	border-top: 1px solid #ced4da;
+}
+
+
+
+
+/* for the "change avail" btn */
+
+.product-input {
+	width: fit-content;
+	border: none;
+	text-align: left;
+	padding: 5px 0 0 0px;
+	margin: 0px;
+	font-size: 13px;
+	text-decoration: underline;
+	background-color: rgba(206, 212, 218, 0);
+	box-shadow: none;
+}
+
+/* .product-form {
+	display: inline-block;
+} */
+
+
+
+
+
+/* ======================== displaying the messages ========================= */
+
+#messages, #reply, #request, #oneProduct {
+	padding: 0px;
+	margin-top: 80px;
+}
+
+#messages .content {
+	padding: 0px;
+}
+
+.message-box {
+	/* background-color: red; */
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	padding: 20px 20px;
+	margin-bottom: 30px;
+	height: 100%;
+	box-shadow: 0px 1px 5px rgba(150,150,150,0.6);
+}
+
+.message-box > div {
+}
+
+.message-sender {
+	/* background-color: yellow; */
+}
+
+.message-details {
+	/* background-color: green; */
+	margin-bottom: 10px;
+}
+
+#name {
+	font-weight: 900;
+	font-size: 16px;
+	color: rgba(250, 191, 72, 1);
+}
+
+#email {
+	font-style: oblique;
+	padding-right: 3px;
+}
+
+.message-message {
+	/* background-color: gray; */
+	border: 1px solid #ced4da;
+	/* background-color: #ced4da; */
+	border-radius: 0.25rem;
+	padding: 10px 15px;
+	margin-bottom: 5px;
+	height: 150px;
+	overflow: auto;
+	width: 100%;
+
+}
+
+.message-reply {
+	/* background-color: blue; */
+	float: right;
+	text-align: right;
+	/* border: 1px solid black; */
+	width: fit-content;
+	padding: 5px 15px;
+	border-radius: 0.25rem;
+	margin-top: 5px;
+	margin-right: 5px;
+	background-color: rgba(250, 191, 72, 1);
+	font-size: 14px;
+}
+
+
+/* ======================== displaying the reply form ========================= */
+
+
+.reply-block {
+	margin-top: 30px;
+}
+
+#reply .message-message {
+	height: fit-content;
+}
+
+/* ======================== displaying the request form ========================= */
+
+#request .message-message {
+
+	height: fit-content;
+	border: 0px;
+	border-radius: 0px;
+	padding-bottom: 30px;
+	border-bottom: 5px solid rgba(250, 191, 72, 1);
+
+}
+
+.message-img img{
+	width: 100%;
+	max-height: 500px;
+	margin-bottom: 15px;
+	object-fit: contain;
+	border: 1px solid #ced4da;
+}
+
+/* ======================== displaying the individual products page ========================= */
+
+
+.product-left {
+	/* background-color: red; */
+	padding: 0px;
+	margin-bottom: 30px;
+}
+
+#oneProduct img {
+	width: 100%;
+	border: 1px solid #ced4da;
+	margin-bottom: 10px;
+}
+
+.product-icon {
+	padding-left: 5px;
+}
+
+/* === */
+
+.product-right {
+	/* background-color: grey; */
+	padding: 15px 30px;
+	margin-bottom: 30px;
+}
+
+.product-details {
+	/* background-color: red; */
+}
+
+#oneProduct .product-title {
+	font-size: 20px;
+	word-break: break-all;
+	hyphens: auto;
+	height: fit-content;
+	line-height: 25px;
+}
+
+.product-id {
+	font-size: 14px;
+	font-style: oblique;
+}
+
+.product-btn {
+	width: fit-content;
+	margin-top: 10px;
+	text-decoration: underline;
+}
+
+.product-btn:hover {
+	color: rgba(250, 191, 72, 1);
+}
+
+.product-description {
+	margin-top: 20px;
+}
+
+
+
+
+.wrapper {
+  min-height: 100%;
+}
+
+.wrapper-inside {
+  padding-bottom: 100px;
+}
+
+.footer {
+  height: 50px;
+  margin-top: -50px;
+  width: 100%;
+  color: #ccc;
+  font-size: 14px;
+  text-align: center;
+}
 

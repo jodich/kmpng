@@ -2,8 +2,8 @@ const db = require('../db.js');
 
 const insertNewItem = (newItem, callback) => {
 
-	let queryString = 'INSERT INTO products (title, img, availability, location, owner_id, service_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *'
-    let values = [newItem.title, newItem.img, newItem.availability, newItem.location, newItem.owner_id, newItem.service];
+	let queryString = 'INSERT INTO products (title, img, availability, location, owner_id, description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *'
+    let values = [newItem.title, newItem.img, newItem.availability, newItem.location, newItem.owner_id, newItem.description];
 
     db.query(queryString, values, callback);
 };
@@ -35,8 +35,16 @@ const selectAvailableProducts = (userLocation, userId, callback) => {
 
 const updateProduct = (updatedItem, productId, callback) => {
 
-    let queryString = "UPDATE products SET title = $1, img = $2 WHERE id = $3";
-    let values = [updatedItem.title, updatedItem.img, productId];
+    let queryString = "UPDATE products SET title = $1, img = $2, description = $3 WHERE id = $4";
+    let values = [updatedItem.title, updatedItem.img, updatedItem.description, productId];
+
+    db.query(queryString, values, callback);
+}
+
+const updateProductNoImg = (updatedItem, productId, callback) => {
+
+    let queryString = "UPDATE products SET title = $1, description = $2 WHERE id = $3";
+    let values = [updatedItem.title, updatedItem.description, productId];
 
     db.query(queryString, values, callback);
 }
@@ -50,5 +58,6 @@ module.exports = {
     selectProduct,
     updateProductAvailabilty,
     selectAvailableProducts,
-    updateProduct
+    updateProduct,
+    updateProductNoImg
 }
