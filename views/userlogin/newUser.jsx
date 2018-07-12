@@ -65,7 +65,7 @@ class NewUser extends React.Component {
 
         <script type="text/javascript" src="/map.js"></script>
         <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKkpNchKuhoHEyC1Sdt_2KqW2s-hIDpCM&callback=initMap">
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0eLkjdHUsR_SX4Eon_CP8OdW4Qa4aztU&callback=initMap">
         </script>
 
 

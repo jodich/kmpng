@@ -25,6 +25,7 @@ var initMap = () => {
 
 var geocodeLatLng = (geocoder, infowindow, pos) => {
 	geocoder.geocode({'location': pos}, function(results, status) {
+		console.log(status)
 	    if (status === 'OK') {
 	    	if (results[0]) {
 	        	var map = new google.maps.Map(document.getElementById('map'), {zoom: 16, center: pos})
