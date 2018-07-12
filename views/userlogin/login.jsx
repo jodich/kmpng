@@ -11,11 +11,11 @@ class Login extends React.Component {
       <LayoutContainer>
         <div className="container" id="login">
           <div className="row">
-            <div className="col-sm-4 content">
+            <div className="col-lg-4 col-md-3 col-sm-2 content">
             </div>
 
 
-            <div className="col-sm-4 content">
+            <div className="col-lg-4 col-md-6 col-sm-8 content">
             <h1>Log In</h1><br/>
               <form method="POST" action="/user/login">
 
@@ -35,7 +35,7 @@ class Login extends React.Component {
               </form>
             </div>
 
-            <div className="col-sm-4 content">
+            <div className="col-lg-4 col-md-3 col-sm-2 content">
             </div>
           </div>
         </div>

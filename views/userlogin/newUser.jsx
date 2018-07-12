@@ -9,15 +9,15 @@ class NewUser extends React.Component {
       <LayoutContainer>
         <div className="container" id="signup">
           <div className="row">
-            <div className="col-sm-2 content">
+            <div className="col-lg-2 col-md-1 content">
             </div>
 
 
-            <div className="col-sm-8 content">
+            <div className="col-lg-8 col-md-10 col-sm-12 content">
               <h1>Sign Up</h1><br/>
               <form method="POST" action="/user/new">
 
-              <div className="col-sm-6 signupSide">
+              <div className="col-lg-6 col-md-6 col-sm-6 signupSide">
                     <div className="form-group signupInput">
                       <label htmlFor="name">Name:</label>
                     	<input type="text" name="name" className="form-control" required/>
@@ -33,7 +33,7 @@ class NewUser extends React.Component {
                     
               </div>
 
-              <div className="col-sm-6 signupSide">
+              <div className="col-lg-6 col-md-6 col-sm-6 signupSide">
                     <div className="form-group signupInput">
                       <label htmlFor="password">Password:</label>
                       <input type="password" name="password" className="form-control" required/>
@@ -56,7 +56,7 @@ class NewUser extends React.Component {
               </form>
             </div>
 
-            <div className="col-sm-2 content">
+            <div className="col-lg-2 col-md-1 content">
             </div>
           </div>
         </div>
