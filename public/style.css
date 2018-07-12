@@ -186,7 +186,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 900;
 }
 
-@keyframes yourAnimation{
+/* @keyframes yourAnimation{
     0%{
         transform: rotate(xx);
         opacity: 0;
@@ -198,8 +198,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #intro .extra a {
-    animation: yourAnimation 0.7s 1 0s linear;
-}
+    animation: yourAnimation 5s 1 0s linear;
+} */
 
 /* #6ec6ae */
 

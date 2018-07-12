@@ -41,8 +41,10 @@ require('./routes')(app);
 
 
 
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000);
+const server = app.listen(PORT, () => console.log('~~~ Tuning in to the waves of port '+PORT+' ~~~'));
+// app.listen(3000);
 
 
 
